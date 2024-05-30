@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, IconButton } from "@mui/material";
 import {
   PlayArrowRounded,
@@ -10,10 +10,14 @@ import {
 } from "@mui/icons-material/";
 import { useTheme } from "@mui/system";
 
+export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
+  useEffect(() => {
+    if (!isLoading) {
+      setPaused(songInfo?.playbackState !== "PLAYING");
+    }
+  }, [isLoading, songInfo]);
 
-
-export const TrackControls = ({ handleInput }) => {
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState();
   const theme = useTheme();
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   return (

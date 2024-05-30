@@ -55,13 +55,8 @@ const Widget = styled('div')(({ theme }) => ({
   backdropFilter: 'blur(40px)',
 }));
 
-
-
-
-
 export default function SonosPlayer() {
   const {isLoading, songInfo, getInfo} = useSonosInfo();
-
   useEffect(() => {
     getInfo('office')
 
@@ -70,13 +65,11 @@ export default function SonosPlayer() {
     // setPaused(songInfo?.playbackState !== "PLAYING")
   }, [])
 
-
-
   return (
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <Widget>
         <TrackInfo songInfo={songInfo} isLoading={isLoading} />
-        <TrackControls handleInput={handleInput} />
+        <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} />
         {/* <TrackPosition /> */}
         <VolumeControls />
       </Widget>
