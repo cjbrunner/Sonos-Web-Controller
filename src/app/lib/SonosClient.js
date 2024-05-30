@@ -16,15 +16,15 @@ export const handleInput = async ({zone, operation, param}) => {
   )
 }
 
-export const useSonosInfo = () => {
-  const [songInfo, setSongInfo] = useState();
+export const useSonosInfo = (path) => {
+  const [sonosInfo, setSonosInfo] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const getInfo = async (zone) => {
     try {
       setIsLoading(true);
-      const res = await SonosClient.get(`/${zone}/state`);
-      setSongInfo(res.data);
+      const res = await SonosClient.get(path);
+      setSonosInfo(res.data);
     } catch (e) {
       console.log(`ERR: ${e}`)
       console.error(e);
@@ -35,7 +35,7 @@ export const useSonosInfo = () => {
 
   return {
     isLoading,
-    songInfo,
+    sonosInfo,
     getInfo,
   };
 }

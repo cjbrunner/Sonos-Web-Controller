@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {styled} from '@mui/material/styles';
 import {Box} from '@mui/material';
 
@@ -9,6 +9,7 @@ import {TrackInfo} from './components/TrackInfo';
 import {TrackControls} from './components/TrackControls';
 import {TrackPosition} from './components/TrackPosition';
 import {VolumeControls} from './components/VolumeControls';
+// import {ZoneSelector} from './components/ZoneSelector';
 
 const WallPaper = styled('div')({
   position: 'absolute',
@@ -56,9 +57,11 @@ const Widget = styled('div')(({ theme }) => ({
 }));
 
 export default function SonosPlayer() {
-  const {isLoading, songInfo, getInfo} = useSonosInfo();
+  const [zone, setZone] = useState('office')
+  const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo('office/state');
+
   useEffect(() => {
-    getInfo('office')
+    getInfo(zone)
 
     // const intervalId = setInterval(() => getInfo('office'), 10000);
     // return () => clearInterval(intervalId);
@@ -72,6 +75,7 @@ export default function SonosPlayer() {
         <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} />
         {/* <TrackPosition /> */}
         <VolumeControls />
+        {/* <ZoneSelector initZone={zone} setZone={setZone} /> */}
       </Widget>
       <WallPaper />
     </Box>
