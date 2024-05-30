@@ -18,9 +18,9 @@ export const handleInput = async ({zone, operation, param}) => {
 
 export const useSonosInfo = (path) => {
   const [sonosInfo, setSonosInfo] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const getInfo = async (zone) => {
+  const getInfo = async () => {
     try {
       setIsLoading(true);
       const res = await SonosClient.get(path);
