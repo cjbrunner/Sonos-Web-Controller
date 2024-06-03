@@ -1,14 +1,11 @@
 "use client"
 
-import axios from 'axios'
 import {useState} from 'react';
 
-const SonosClient = axios.create({
-  baseURL: 'http://192.168.1.179:5005',
-});
+const SERVER_URL = 'http://192.168.1.179:5005'
 
 export const handleInput = async ({zone, operation, param}) => {
-  SonosClient.get(`/${zone}/${operation}/${param}`)
+  fetch(`${SERVER_URL}/${zone}/${operation}/${param}`)
   .then(
     res => {
       console.log(res);
@@ -16,18 +13,18 @@ export const handleInput = async ({zone, operation, param}) => {
   )
 }
 
-export const useSonosInfo = (path) => {
+export const useSonosInfo = () => {
   const [sonosInfo, setSonosInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  const getInfo = async () => {
+  const getInfo = async (zone) => {
     try {
       setIsLoading(true);
-      const res = await SonosClient.get(path);
-      setSonosInfo(res.data);
-    } catch (e) {
-      console.log(`ERR: ${e}`)
-      console.error(e);
+      const statePath = `${SERVER_URL}/${zone}/state`
+      const res = await fetch(statePath)
+      setSonosInfo(await res.json());
+    } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

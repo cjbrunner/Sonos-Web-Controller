@@ -58,14 +58,10 @@ const Widget = styled('div')(({ theme }) => ({
 
 export default function SonosPlayer() {
   const [zone, setZone] = useState('office')
-  const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo('office/state');
+  const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
   useEffect(() => {
     getInfo(zone)
-
-    // const intervalId = setInterval(() => getInfo('office'), 10000);
-    // return () => clearInterval(intervalId);
-    // setPaused(songInfo?.playbackState !== "PLAYING")
   }, [])
 
   return (
