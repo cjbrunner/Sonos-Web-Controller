@@ -9,7 +9,7 @@ import {TrackInfo} from './components/TrackInfo';
 import {TrackControls} from './components/TrackControls';
 import {TrackPosition} from './components/TrackPosition';
 import {VolumeControls} from './components/VolumeControls';
-// import {ZoneSelector} from './components/ZoneSelector';
+import {ZoneSelector} from './components/ZoneSelector';
 
 const WallPaper = styled('div')({
   position: 'absolute',
@@ -60,6 +60,11 @@ export default function SonosPlayer() {
   const [zone, setZone] = useState('office')
   const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
+  const handleSetZone = (zone) => {
+    setZone(zone)
+    getInfo(zone)
+  }
+
   useEffect(() => {
     getInfo(zone)
   }, [])
@@ -71,7 +76,7 @@ export default function SonosPlayer() {
         <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} />
         {/* <TrackPosition /> */}
         <VolumeControls />
-        {/* <ZoneSelector initZone={zone} setZone={setZone} /> */}
+        <ZoneSelector initZone={zone} handleSetZone={handleSetZone} />
       </Widget>
       <WallPaper />
     </Box>
