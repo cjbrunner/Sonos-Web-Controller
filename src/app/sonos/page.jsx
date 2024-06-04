@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect, useState} from 'react';
+import { useSearchParams } from 'next/navigation'
 import {styled} from '@mui/material/styles';
 import {Box} from '@mui/material';
 
@@ -57,7 +58,9 @@ const Widget = styled('div')(({ theme }) => ({
 }));
 
 export default function SonosPlayer() {
-  const [zone, setZone] = useState('office')
+  const searchParams = useSearchParams()
+  const param = searchParams.get('defaultzone')
+  const [zone, setZone] = useState(param || 'office')
   const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
   const handleSetZone = async (zone) => {
