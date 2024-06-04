@@ -10,7 +10,7 @@ import {
 } from "@mui/icons-material/";
 import { useTheme } from "@mui/system";
 
-export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
+export const TrackControls = ({ isLoading, songInfo, handleInput, currentZone }) => {
   useEffect(() => {
     if (!isLoading) {
       setPaused(songInfo?.playbackState !== "PLAYING");
@@ -32,7 +32,7 @@ export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
       <IconButton
         aria-label="previous song"
         onClick={(e) => {
-          handleInput({ zone: "office", operation: "previous", param: "" }, e);
+          handleInput({ zone: currentZone, operation: "previous", param: "" }, e);
         }}
       >
         <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
@@ -40,7 +40,7 @@ export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
       <IconButton
         aria-label={paused ? "play" : "pause"}
         onClick={(e) => {
-          handleInput({ zone: "office", operation: "playpause", param: "" }, e);
+          handleInput({ zone: currentZone, operation: "playpause", param: "" }, e);
           setPaused((prevPause) => !prevPause);
         }}
       >
@@ -56,7 +56,7 @@ export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
       <IconButton
         aria-label="next song"
         onClick={(e) =>
-          handleInput({ zone: "office", operation: "next", param: "" }, e)
+          handleInput({ zone: currentZone, operation: "next", param: "" }, e)
         }
       >
         <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />

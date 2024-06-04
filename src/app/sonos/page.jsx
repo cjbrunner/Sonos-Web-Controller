@@ -59,8 +59,8 @@ const Widget = styled('div')(({ theme }) => ({
 
 export default function SonosPlayer() {
   const searchParams = useSearchParams()
-  const param = searchParams.get('defaultzone')
-  const [zone, setZone] = useState(param || 'office')
+  const defaultZone = searchParams.get('defaultzone')
+  const [zone, setZone] = useState(defaultZone || 'office')
   const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
   const handleSetZone = async (zone) => {
@@ -78,9 +78,9 @@ export default function SonosPlayer() {
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <Widget>
         <TrackInfo songInfo={songInfo} isLoading={isLoading} />
-        <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} />
+        <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} currentZone={zone} />
         {/* <TrackPosition /> */}
-        <VolumeControls />
+        <VolumeControls currentZone={zone} />
         <ZoneSelector initZone={zone} handleSetZone={handleSetZone} />
       </Widget>
       <WallPaper />
