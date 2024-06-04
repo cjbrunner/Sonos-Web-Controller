@@ -9,11 +9,9 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(`click event: ${event}`);
     // handleSetZone(event);
   };
   const handleClose = (event) => {
-    console.log(`close event: ${event}`);
     setAnchorEl(null);
   };
 
@@ -38,7 +36,10 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
         }}
       >
         {zones.map((zone) => (
-          <MenuItem key={zone} onClick={() => handleSetZone(zone)}>{zone}</MenuItem>
+          <MenuItem key={zone} onClick={() => {
+            handleClose();
+            handleSetZone(zone)
+          }}>{zone}</MenuItem>
         ))}
       </Menu>
     </Box>
