@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { handleInput } from '../../lib/SonosClient';
 
-const zones = ["Office", "Living Room", "Kitchen", "Main Bedroom", "Shed", "Move", "Sammy"];
+const zones = ["Office", "Living Room", "Kitchen", "Main Bedroom", "Shed", "Move", "Bathroom"];
 
 export const ZoneSelector = ({initZone, handleSetZone}) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,7 +35,7 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        {zones.map((zone) => (
+        {zones.sort().map((zone) => (
           <MenuItem key={zone} onClick={() => {
             handleClose();
             handleSetZone(zone)
