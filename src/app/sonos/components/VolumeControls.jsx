@@ -7,7 +7,7 @@ import { useTheme } from "@mui/system";
 import { handleInput } from "../../lib/SonosClient";
 
 
-export const VolumeControls = () => {
+export const VolumeControls = ({currentZone}) => {
   const theme = useTheme();
   const [volume, setVolume] = useState(10);
   const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
@@ -15,7 +15,7 @@ export const VolumeControls = () => {
     setVolume(newValue)
   }
   const handleCallVolume = (event, newValue) => {
-    handleInput({zone: 'office', operation: 'volume', param: newValue})
+    handleInput({zone: currentZone, operation: 'volume', param: newValue})
   }
 
   return (
