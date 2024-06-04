@@ -9,8 +9,22 @@ export const handleInput = async ({zone, operation, param}) => {
   .then(
     res => {
       console.log(res);
+      return res
     }
   )
+}
+
+export async function getAllZones()  {
+  try {
+    const res = await fetch(`${SERVER_URL}/zones`)
+    if (res.ok) {
+      return await res.json();
+    } else {
+      console.error("Failed to fetch zones");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export const useSonosInfo = () => {
@@ -22,7 +36,11 @@ export const useSonosInfo = () => {
       setIsLoading(true);
       const statePath = `${SERVER_URL}/${zone}/state`
       const res = await fetch(statePath)
-      setSonosInfo(await res.json());
+      if (res.ok) {
+        setSonosInfo(await res.json());
+      } else {
+        console.error(`Failed to fetch ${statePath}`);
+      }
     } catch (error) {
       console.error(error);
     } finally {

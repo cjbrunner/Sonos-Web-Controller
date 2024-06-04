@@ -19,7 +19,7 @@ export const TrackInfo = ({ songInfo, isLoading }) => {
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <CoverImage>
-          <img src={isLoading ? "" : songInfo?.currentTrack.albumArtUri} />
+          <img src={isLoading ? "" : songInfo?.currentTrack.absoluteAlbumArtUri} />
         </CoverImage>
         <Box sx={{ ml: 1.5, minWidth: 0 }}>
           <Typography variant="caption" color="text.secondary" fontWeight={500}>

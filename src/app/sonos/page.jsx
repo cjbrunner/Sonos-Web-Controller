@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {styled} from '@mui/material/styles';
 import {Box} from '@mui/material';
 
-import {handleInput, useSonosInfo} from '../lib/SonosClient';
+import {getAllZones, handleInput, useSonosInfo} from '../lib/SonosClient';
 import {TrackInfo} from './components/TrackInfo';
 import {TrackControls} from './components/TrackControls';
 import {TrackPosition} from './components/TrackPosition';
@@ -46,7 +46,7 @@ const WallPaper = styled('div')({
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
   borderRadius: 16,
-  width: 343,
+  width: 640,
   maxWidth: '100%',
   margin: 'auto',
   position: 'relative',
@@ -60,14 +60,16 @@ export default function SonosPlayer() {
   const [zone, setZone] = useState('office')
   const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
-  const handleSetZone = (zone) => {
-    setZone(zone)
-    getInfo(zone)
+  const handleSetZone = async (zone) => {
+    const data = await getAllZones()
+    const zoneList = data.flatMap(z => z.members.map(m => m.roomName))
+    console.log(zoneList)
+    zoneList.includes(zone) && setZone(zone)
   }
 
   useEffect(() => {
     getInfo(zone)
-  }, [])
+  }, [zone])
 
   return (
     <Box sx={{ width: '100%', overflow: 'hidden' }}>

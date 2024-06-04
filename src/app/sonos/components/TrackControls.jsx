@@ -46,11 +46,11 @@ export const TrackControls = ({ isLoading, songInfo, handleInput }) => {
       >
         {paused ? (
           <PlayArrowRounded
-            sx={{ fontSize: "3rem" }}
+            sx={{ fontSize: "4rem" }}
             htmlColor={mainIconColor}
           />
         ) : (
-          <PauseRounded sx={{ fontSize: "3rem" }} htmlColor={mainIconColor} />
+          <PauseRounded sx={{ fontSize: "4rem" }} htmlColor={mainIconColor} />
         )}
       </IconButton>
       <IconButton

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { handleInput } from '../../lib/SonosClient';
 
-const zones = ["office", "living room", "kitchen", "main bedroom", "shed", "move", "sammy"];
+const zones = ["Office", "Living Room", "Kitchen", "Main Bedroom", "Shed", "Move", "Sammy"];
 
 export const ZoneSelector = ({initZone, handleSetZone}) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,7 +24,7 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Zones...
+        {initZone}...
       </Button>
       <Menu
         id="basic-menu"
