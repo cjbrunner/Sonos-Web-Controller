@@ -55,9 +55,9 @@ export const TrackControls = ({ isLoading, songInfo, handleInput, currentZone })
       </IconButton>
       <IconButton
         aria-label="next song"
-        onClick={(e) =>
-          handleInput({ zone: currentZone, operation: "next", param: "" }, e)
-        }
+        onClick={(e) => {
+          handleInput({ zone: currentZone, operation: "next", param: "" }, e);
+        }}
       >
         <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
       </IconButton>
