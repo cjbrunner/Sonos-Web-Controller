@@ -1,17 +1,17 @@
-import {SonosInfo} from '@/app/lib/SonosClient';
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { SonosInfo } from '@/app/lib/SonosClient';
+import { Box, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
-const CoverImage = styled("div")({
+const CoverImage = styled('div')({
   width: 100,
   height: 100,
-  objectFit: "cover",
-  overflow: "hidden",
+  objectFit: 'cover',
+  overflow: 'hidden',
   flexShrink: 0,
   borderRadius: 8,
-  backgroundColor: "rgba(0,0,0,0.08)",
-  "& > img": {
-    width: "100%",
+  backgroundColor: 'rgba(0,0,0,0.08)',
+  '& > img': {
+    width: '100%',
   },
 });
 
@@ -20,22 +20,27 @@ type TrackInfoProps = {
   isLoading: boolean;
 };
 
-export const TrackInfo: React.FC<TrackInfoProps> = ({ songInfo, isLoading }) => {
+export const TrackInfo: React.FC<TrackInfoProps> = ({
+  songInfo,
+  isLoading,
+}) => {
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <CoverImage>
-          <img src={isLoading ? "" : songInfo?.currentTrack.absoluteAlbumArtUri} />
+          <img
+            src={isLoading ? '' : songInfo?.currentTrack.absoluteAlbumArtUri}
+          />
         </CoverImage>
         <Box sx={{ ml: 1.5, minWidth: 0 }}>
           <Typography variant="caption" color="text.secondary" fontWeight={500}>
-            {isLoading ? "Loading..." : songInfo?.currentTrack.artist}
+            {isLoading ? 'Loading...' : songInfo?.currentTrack.artist}
           </Typography>
           <Typography noWrap>
-            <b>{isLoading ? "Loading..." : songInfo?.currentTrack.title}</b>
+            <b>{isLoading ? 'Loading...' : songInfo?.currentTrack.title}</b>
           </Typography>
           <Typography noWrap letterSpacing={-0.25}>
-            {isLoading ? "Loading..." : songInfo?.currentTrack.album}
+            {isLoading ? 'Loading...' : songInfo?.currentTrack.album}
           </Typography>
         </Box>
       </Box>

@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react";
-import { Box, IconButton } from "@mui/material";
+import { useState, useEffect } from 'react';
+import { Box, IconButton } from '@mui/material';
 import {
   PlayArrowRounded,
   PauseRounded,
   FastForwardRounded,
   FastRewindRounded,
-} from "@mui/icons-material/";
-import { useTheme } from "@mui/system";
+} from '@mui/icons-material/';
+import { useTheme } from '@mui/system';
 
 type TrackControlsProps = {
   isLoading: boolean;
@@ -25,7 +25,7 @@ export const TrackControls: React.FC<TrackControlsProps> = ({
 }) => {
   useEffect(() => {
     if (!isLoading) {
-      setPaused(songInfo?.playbackState !== "PLAYING");
+      setPaused(songInfo?.playbackState !== 'PLAYING');
     }
   }, [isLoading, songInfo]);
 
@@ -35,40 +35,46 @@ export const TrackControls: React.FC<TrackControlsProps> = ({
   return (
     <Box
       sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         mt: -1,
       }}
     >
       <IconButton
         aria-label="previous song"
         onClick={(e) => {
-          handleInput({ zone: currentZone, operation: "previous", param: "" }, e);
+          handleInput(
+            { zone: currentZone, operation: 'previous', param: '' },
+            e,
+          );
         }}
       >
         <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
       </IconButton>
       <IconButton
-        aria-label={paused ? "play" : "pause"}
+        aria-label={paused ? 'play' : 'pause'}
         onClick={(e) => {
-          handleInput({ zone: currentZone, operation: "playpause", param: "" }, e);
+          handleInput(
+            { zone: currentZone, operation: 'playpause', param: '' },
+            e,
+          );
           setPaused((prevPause) => !prevPause);
         }}
       >
         {paused ? (
           <PlayArrowRounded
-            sx={{ fontSize: "4rem" }}
+            sx={{ fontSize: '4rem' }}
             htmlColor={mainIconColor}
           />
         ) : (
-          <PauseRounded sx={{ fontSize: "4rem" }} htmlColor={mainIconColor} />
+          <PauseRounded sx={{ fontSize: '4rem' }} htmlColor={mainIconColor} />
         )}
       </IconButton>
       <IconButton
         aria-label="next song"
         onClick={(e) =>
-          handleInput({ zone: currentZone, operation: "next", param: "" }, e)
+          handleInput({ zone: currentZone, operation: 'next', param: '' }, e)
         }
       >
         <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />

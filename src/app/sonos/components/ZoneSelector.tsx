@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Box, Button, Menu, MenuItem, MenuProps} from "@mui/material";
-import {handleInput} from "../../lib/SonosClient";
+import React, { useState } from 'react';
+import { Box, Button, Menu, MenuItem, MenuProps } from '@mui/material';
+import { handleInput } from '../../lib/SonosClient';
 
 // prettier-ignore
 const zones = [ 'Office', 'Living Room','Kitchen','Main Bedroom','Shed','Move', 'Bathroom'];
@@ -20,7 +20,7 @@ export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
     setAnchorEl(event.currentTarget);
     // handleSetZone(event);
   };
-  const handleMenuClose: MenuProps["onClose"] = (event) => {
+  const handleMenuClose: MenuProps['onClose'] = (event) => {
     setAnchorEl(null);
   };
   const handleItemClose = () => {
@@ -28,7 +28,7 @@ export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -48,13 +48,17 @@ export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
         }}
       >
         {zones.sort().map((zone) => (
-          <MenuItem key={zone} onClick={() => {
-            handleItemClose();
-            handleSetZone(zone)
-          }}>{zone}</MenuItem>
+          <MenuItem
+            key={zone}
+            onClick={() => {
+              handleItemClose();
+              handleSetZone(zone);
+            }}
+          >
+            {zone}
+          </MenuItem>
         ))}
       </Menu>
     </Box>
   );
-}
-
+};

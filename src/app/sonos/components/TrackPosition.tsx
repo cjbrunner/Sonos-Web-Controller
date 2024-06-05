@@ -1,8 +1,8 @@
 'use client';
 
-import {useState} from 'react';
-import {Box, Slider, Typography} from '@mui/material';
-import {styled, useTheme} from '@mui/material/styles';
+import { useState } from 'react';
+import { Box, Slider, Typography } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
 
 const TinyText = styled(Typography)({
   fontSize: '0.75rem',

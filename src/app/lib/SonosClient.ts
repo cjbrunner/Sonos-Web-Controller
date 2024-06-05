@@ -1,6 +1,6 @@
 'use client';
-import {z} from 'zod';
-import {useState} from 'react';
+import { z } from 'zod';
+import { useState } from 'react';
 
 // Get the environment variable for the Sonos server
 // This should be read from a .env.local file in the root
@@ -15,7 +15,7 @@ if (!SERVER_URL) {
 // which will give us known types and early errors if the data is wrong
 const ZonesResponseSchema = z.array(
   z.object({
-    members: z.array(z.object({roomName: z.string()})),
+    members: z.array(z.object({ roomName: z.string() })),
   }),
 );
 const SonosInfoSchema = z.object({
@@ -34,10 +34,10 @@ export type SonosInfo = z.infer<typeof SonosInfoSchema>;
 
 // Some mock data so I can test the UI without a Sonos server
 const mockZonesResponse: ZonesResponse = [
-  {members: [{roomName: 'Office'}, {roomName: 'Living Room'}]},
-  {members: [{roomName: 'Kitchen'}, {roomName: 'Main Bedroom'}]},
-  {members: [{roomName: 'Shed'}, {roomName: 'Move'}]},
-  {members: [{roomName: 'Bathroom'}]},
+  { members: [{ roomName: 'Office' }, { roomName: 'Living Room' }] },
+  { members: [{ roomName: 'Kitchen' }, { roomName: 'Main Bedroom' }] },
+  { members: [{ roomName: 'Shed' }, { roomName: 'Move' }] },
+  { members: [{ roomName: 'Bathroom' }] },
 ];
 
 const mockSonosInfo: SonosInfo = {

@@ -1,10 +1,10 @@
 'use client';
 
-import {useState} from 'react';
-import {Stack, Slider, SliderOwnProps} from '@mui/material';
-import {VolumeDownRounded, VolumeUpRounded} from '@mui/icons-material/';
-import {useTheme} from '@mui/system';
-import {handleInput} from '../../lib/SonosClient';
+import { useState } from 'react';
+import { Stack, Slider, SliderOwnProps } from '@mui/material';
+import { VolumeDownRounded, VolumeUpRounded } from '@mui/icons-material/';
+import { useTheme } from '@mui/system';
+import { handleInput } from '../../lib/SonosClient';
 
 type VolumeControlsProps = {
   currentZone: string;
@@ -47,19 +47,19 @@ export const VolumeControls: React.FC<VolumeControlsProps> = ({
         onChange={handleSetVolume}
         onChangeCommitted={handleCallVolume}
         sx={{
-          color: theme.palette.mode === "dark" ? "#fff" : "rgba(0,0,0,0.87)",
-          "& .MuiSlider-track": {
-            border: "none",
+          color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+          '& .MuiSlider-track': {
+            border: 'none',
           },
-          "& .MuiSlider-thumb": {
+          '& .MuiSlider-thumb': {
             width: 24,
             height: 24,
-            backgroundColor: "#fff",
-            "&::before": {
-              boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+            backgroundColor: '#fff',
+            '&::before': {
+              boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
             },
-            "&:hover, &.Mui-focusVisible, &.Mui-active": {
-              boxShadow: "none",
+            '&:hover, &.Mui-focusVisible, &.Mui-active': {
+              boxShadow: 'none',
             },
           },
         }}
