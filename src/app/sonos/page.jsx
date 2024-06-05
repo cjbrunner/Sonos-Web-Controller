@@ -66,7 +66,6 @@ export default function SonosPlayer() {
   const handleSetZone = async (zone) => {
     const data = await getAllZones()
     const zoneList = data.flatMap(z => z.members.map(m => m.roomName))
-    console.log(zoneList)
     zoneList.includes(zone) && setZone(zone)
   }
 
