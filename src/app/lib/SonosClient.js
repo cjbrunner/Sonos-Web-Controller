@@ -8,7 +8,6 @@ export const handleInput = async ({zone, operation, param}) => {
   fetch(`${SERVER_URL}/${zone}/${operation}/${param}`)
   .then(
     res => {
-      console.log(res);
       return res
     }
   )
