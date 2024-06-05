@@ -72,12 +72,18 @@ export default function SonosPlayer() {
 
   useEffect(() => {
     getInfo(zone)
+
+    const interval = setInterval(() => {
+      getInfo(zone)
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [zone])
 
   return (
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <Widget>
-        <TrackInfo songInfo={songInfo} isLoading={isLoading} />
+        <TrackInfo songInfo={songInfo} />
         <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} currentZone={zone} />
         {/* <TrackPosition /> */}
         <VolumeControls currentZone={zone} />

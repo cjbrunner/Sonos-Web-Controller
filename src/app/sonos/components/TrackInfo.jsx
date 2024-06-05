@@ -14,22 +14,22 @@ const CoverImage = styled("div")({
   },
 });
 
-export const TrackInfo = ({ songInfo, isLoading }) => {
+export const TrackInfo = ({ songInfo }) => {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <CoverImage>
-          <img src={isLoading ? "" : songInfo?.currentTrack.absoluteAlbumArtUri} />
+          <img src={songInfo?.currentTrack.absoluteAlbumArtUri} />
         </CoverImage>
         <Box sx={{ ml: 1.5, minWidth: 0 }}>
           <Typography variant="caption" color="text.secondary" fontWeight={500}>
-            {isLoading ? "Loading..." : songInfo?.currentTrack.artist}
+            {songInfo?.currentTrack.artist}
           </Typography>
           <Typography noWrap>
-            <b>{isLoading ? "Loading..." : songInfo?.currentTrack.title}</b>
+            <b>{songInfo?.currentTrack.title}</b>
           </Typography>
           <Typography noWrap letterSpacing={-0.25}>
-            {isLoading ? "Loading..." : songInfo?.currentTrack.album}
+            {songInfo?.currentTrack.album}
           </Typography>
         </Box>
       </Box>
