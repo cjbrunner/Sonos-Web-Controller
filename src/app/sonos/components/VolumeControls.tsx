@@ -1,10 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { Stack, Slider, SliderOwnProps } from '@mui/material';
 import { VolumeDownRounded, VolumeUpRounded } from '@mui/icons-material/';
 import { useTheme } from '@mui/system';
-import { handleInput } from '../../lib/SonosClient';
 import { useSetVolumeMutation, useZoneStateQuery } from '../queries';
 
 type VolumeControlsProps = {

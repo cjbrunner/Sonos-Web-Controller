@@ -1,9 +1,6 @@
-import { useSearchParams } from 'next/navigation';
-import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { Player } from './components/Player';
 import { WallPaper } from './components/Wallpaper';
-import { QueryClientProvider } from '@tanstack/react-query';
 
 export default async function SonosPlayer({
   searchParams,

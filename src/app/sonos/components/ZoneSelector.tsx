@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Box, Button, Menu, MenuItem, MenuProps, Select } from '@mui/material';
-import { useZoneListQuery, useZoneStateQuery } from '../queries';
+import React from 'react';
+import { Box, MenuItem, Select } from '@mui/material';
+import { useZoneListQuery } from '../queries';
 
 // prettier-ignore
 
 type ZoneSelectorProps = {
   zone: string;
-  handleSetZone: (zone: string) => void;
+  handleSetZone: () => void;
 };
 
 export const ZoneSelector: React.FC<ZoneSelectorProps> = ({

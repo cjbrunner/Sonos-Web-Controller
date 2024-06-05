@@ -1,6 +1,5 @@
 'use server';
 
-import { cache } from 'react';
 import { mockZonesListResponse, mockZoneStateResponse, wait } from './mock';
 import { ZonesListResponseSchema, ZoneStateResponseSchema } from './schema';
 
