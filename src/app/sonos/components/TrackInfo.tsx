@@ -1,6 +1,8 @@
-import { SonosInfo } from '@/app/lib/SonosClient';
+'use client';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { useQuery } from '@tanstack/react-query';
+import { getZoneState } from '../actions';
 
 const CoverImage = styled('div')({
   width: 100,
@@ -16,31 +18,32 @@ const CoverImage = styled('div')({
 });
 
 type TrackInfoProps = {
-  songInfo: SonosInfo | null;
-  isLoading: boolean;
+  zone: string;
 };
 
-export const TrackInfo: React.FC<TrackInfoProps> = ({
-  songInfo,
-  isLoading,
-}) => {
+export const TrackInfo: React.FC<TrackInfoProps> = ({ zone }) => {
+  const { isLoading, data } = useQuery({
+    queryKey: ['currentZoneState', zone],
+    queryFn: async () => getZoneState(zone),
+  });
+
+  const songInfo = data?.currentTrack;
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <CoverImage>
-          <img
-            src={isLoading ? '' : songInfo?.currentTrack.absoluteAlbumArtUri}
-          />
+          <img src={isLoading ? '' : songInfo?.absoluteAlbumArtUri} />
         </CoverImage>
         <Box sx={{ ml: 1.5, minWidth: 0 }}>
           <Typography variant="caption" color="text.secondary" fontWeight={500}>
-            {isLoading ? 'Loading...' : songInfo?.currentTrack.artist}
+            {isLoading ? 'Loading...' : songInfo?.artist}
           </Typography>
           <Typography noWrap>
-            <b>{isLoading ? 'Loading...' : songInfo?.currentTrack.title}</b>
+            <b>{isLoading ? 'Loading...' : songInfo?.title}</b>
           </Typography>
           <Typography noWrap letterSpacing={-0.25}>
-            {isLoading ? 'Loading...' : songInfo?.currentTrack.album}
+            {isLoading ? 'Loading...' : songInfo?.album}
           </Typography>
         </Box>
       </Box>

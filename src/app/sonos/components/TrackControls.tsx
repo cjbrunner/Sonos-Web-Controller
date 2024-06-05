@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Box, IconButton } from '@mui/material';
 import {
   PlayArrowRounded,
@@ -9,28 +8,30 @@ import {
   FastRewindRounded,
 } from '@mui/icons-material/';
 import { useTheme } from '@mui/system';
+import {
+  useNextMutation,
+  usePlayPauseMutation,
+  usePreviousMutation,
+  useZoneStateQuery,
+} from '../queries';
 
 type TrackControlsProps = {
-  isLoading: boolean;
-  songInfo: any;
-  handleInput: any;
-  currentZone: string;
+  zone: string;
 };
 
-export const TrackControls: React.FC<TrackControlsProps> = ({
-  isLoading,
-  songInfo,
-  handleInput,
-  currentZone,
-}) => {
-  useEffect(() => {
-    if (!isLoading) {
-      setPaused(songInfo?.playbackState !== 'PLAYING');
-    }
-  }, [isLoading, songInfo]);
-
-  const [paused, setPaused] = useState(false);
+export const TrackControls: React.FC<TrackControlsProps> = ({ zone }) => {
   const theme = useTheme();
+  const { mutate: playPause } = usePlayPauseMutation(zone);
+  const { mutate: next } = useNextMutation(zone);
+  const { mutate: previous } = usePreviousMutation(zone);
+  const { data: zoneState, isLoading } = useZoneStateQuery(zone);
+
+  if (isLoading || !zoneState) {
+    return <div>Loading...</div>;
+  }
+
+  const { playbackState } = zoneState;
+
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   return (
     <Box
@@ -41,28 +42,16 @@ export const TrackControls: React.FC<TrackControlsProps> = ({
         mt: -1,
       }}
     >
-      <IconButton
-        aria-label="previous song"
-        onClick={(e) => {
-          handleInput(
-            { zone: currentZone, operation: 'previous', param: '' },
-            e,
-          );
-        }}
-      >
+      <IconButton aria-label="previous song" onClick={() => previous()}>
         <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
       </IconButton>
       <IconButton
-        aria-label={paused ? 'play' : 'pause'}
-        onClick={(e) => {
-          handleInput(
-            { zone: currentZone, operation: 'playpause', param: '' },
-            e,
-          );
-          setPaused((prevPause) => !prevPause);
+        aria-label={playbackState ? 'play' : 'pause'}
+        onClick={() => {
+          playPause();
         }}
       >
-        {paused ? (
+        {playbackState === 'paused' ? (
           <PlayArrowRounded
             sx={{ fontSize: '4rem' }}
             htmlColor={mainIconColor}
@@ -71,12 +60,7 @@ export const TrackControls: React.FC<TrackControlsProps> = ({
           <PauseRounded sx={{ fontSize: '4rem' }} htmlColor={mainIconColor} />
         )}
       </IconButton>
-      <IconButton
-        aria-label="next song"
-        onClick={(e) =>
-          handleInput({ zone: currentZone, operation: 'next', param: '' }, e)
-        }
-      >
+      <IconButton aria-label="next song" onClick={() => next()}>
         <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
       </IconButton>
     </Box>
