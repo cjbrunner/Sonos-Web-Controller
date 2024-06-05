@@ -1,3 +1,4 @@
+import {SonosInfo} from '@/app/lib/SonosClient';
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -14,7 +15,12 @@ const CoverImage = styled("div")({
   },
 });
 
-export const TrackInfo = ({ songInfo, isLoading }) => {
+type TrackInfoProps = {
+  songInfo: SonosInfo | null;
+  isLoading: boolean;
+};
+
+export const TrackInfo: React.FC<TrackInfoProps> = ({ songInfo, isLoading }) => {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>

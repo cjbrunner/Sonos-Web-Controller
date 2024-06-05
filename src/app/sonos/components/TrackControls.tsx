@@ -10,14 +10,26 @@ import {
 } from "@mui/icons-material/";
 import { useTheme } from "@mui/system";
 
-export const TrackControls = ({ isLoading, songInfo, handleInput, currentZone }) => {
+type TrackControlsProps = {
+  isLoading: boolean;
+  songInfo: any;
+  handleInput: any;
+  currentZone: string;
+};
+
+export const TrackControls: React.FC<TrackControlsProps> = ({
+  isLoading,
+  songInfo,
+  handleInput,
+  currentZone,
+}) => {
   useEffect(() => {
     if (!isLoading) {
       setPaused(songInfo?.playbackState !== "PLAYING");
     }
   }, [isLoading, songInfo]);
 
-  const [paused, setPaused] = useState();
+  const [paused, setPaused] = useState(false);
   const theme = useTheme();
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   return (

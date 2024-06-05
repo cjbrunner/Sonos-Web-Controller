@@ -1,22 +1,36 @@
-"use client"
+'use client';
 
-import { useState } from "react";
-import { Stack, Slider } from "@mui/material";
-import { VolumeDownRounded, VolumeUpRounded } from "@mui/icons-material/";
-import { useTheme } from "@mui/system";
-import { handleInput } from "../../lib/SonosClient";
+import {useState} from 'react';
+import {Stack, Slider, SliderOwnProps} from '@mui/material';
+import {VolumeDownRounded, VolumeUpRounded} from '@mui/icons-material/';
+import {useTheme} from '@mui/system';
+import {handleInput} from '../../lib/SonosClient';
 
+type VolumeControlsProps = {
+  currentZone: string;
+};
 
-export const VolumeControls = ({currentZone}) => {
+export const VolumeControls: React.FC<VolumeControlsProps> = ({
+  currentZone,
+}) => {
   const theme = useTheme();
   const [volume, setVolume] = useState(10);
-  const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
-  const handleSetVolume = (event, newValue) => {
-    setVolume(newValue)
-  }
-  const handleCallVolume = (event, newValue) => {
-    handleInput({zone: currentZone, operation: 'volume', param: newValue})
-  }
+  const lightIconColor =
+    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+  const handleSetVolume: SliderOwnProps['onChange'] = (event, newValue) => {
+    setVolume(Array.isArray(newValue) ? newValue[0] : newValue);
+  };
+
+  const handleCallVolume: SliderOwnProps['onChangeCommitted'] = (
+    event,
+    newValue,
+  ) => {
+    handleInput({
+      zone: currentZone,
+      operation: 'volume',
+      param: (Array.isArray(newValue) ? newValue[0] : newValue).toString(),
+    });
+  };
 
   return (
     <Stack
@@ -53,4 +67,4 @@ export const VolumeControls = ({currentZone}) => {
       <VolumeUpRounded htmlColor={lightIconColor} />
     </Stack>
   );
-}
+};

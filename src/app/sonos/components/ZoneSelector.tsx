@@ -1,17 +1,29 @@
-import {useState} from 'react';
-import { Box, Button, Menu, MenuItem } from "@mui/material";
-import { handleInput } from '../../lib/SonosClient';
+import React, {useState} from "react";
+import {Box, Button, Menu, MenuItem, MenuProps} from "@mui/material";
+import {handleInput} from "../../lib/SonosClient";
 
-const zones = ["Office", "Living Room", "Kitchen", "Main Bedroom", "Shed", "Move", "Bathroom"];
+// prettier-ignore
+const zones = [ 'Office', 'Living Room','Kitchen','Main Bedroom','Shed','Move', 'Bathroom'];
 
-export const ZoneSelector = ({initZone, handleSetZone}) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+type ZoneSelectorProps = {
+  initZone: string;
+  handleSetZone: (zone: string) => void;
+};
+
+export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
+  initZone,
+  handleSetZone,
+}) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     setAnchorEl(event.currentTarget);
     // handleSetZone(event);
   };
-  const handleClose = (event) => {
+  const handleMenuClose: MenuProps["onClose"] = (event) => {
+    setAnchorEl(null);
+  };
+  const handleItemClose = () => {
     setAnchorEl(null);
   };
 
@@ -30,14 +42,14 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleMenuClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
       >
         {zones.sort().map((zone) => (
           <MenuItem key={zone} onClick={() => {
-            handleClose();
+            handleItemClose();
             handleSetZone(zone)
           }}>{zone}</MenuItem>
         ))}
@@ -45,3 +57,4 @@ export const ZoneSelector = ({initZone, handleSetZone}) => {
     </Box>
   );
 }
+

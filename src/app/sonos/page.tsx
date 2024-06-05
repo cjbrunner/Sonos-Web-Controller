@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
 import {useEffect, useState} from 'react';
-import { useSearchParams } from 'next/navigation'
+import {useSearchParams} from 'next/navigation';
 import {styled} from '@mui/material/styles';
 import {Box} from '@mui/material';
 
@@ -44,7 +44,7 @@ const WallPaper = styled('div')({
   },
 });
 
-const Widget = styled('div')(({ theme }) => ({
+const Widget = styled('div')(({theme}) => ({
   padding: 16,
   borderRadius: 16,
   width: 640,
@@ -58,27 +58,35 @@ const Widget = styled('div')(({ theme }) => ({
 }));
 
 export default function SonosPlayer() {
-  const searchParams = useSearchParams()
-  const defaultZone = searchParams.get('defaultzone')
-  const [zone, setZone] = useState(defaultZone || 'office')
+  const searchParams = useSearchParams();
+  const defaultZone = searchParams.get('defaultzone');
+  const [zone, setZone] = useState(defaultZone ?? 'office');
   const {isLoading, sonosInfo: songInfo, getInfo} = useSonosInfo();
 
-  const handleSetZone = async (zone) => {
-    const data = await getAllZones()
-    const zoneList = data.flatMap(z => z.members.map(m => m.roomName))
-    console.log(zoneList)
-    zoneList.includes(zone) && setZone(zone)
-  }
+  const handleSetZone = async (zone: string) => {
+    const data = await getAllZones();
+    if (!data) {
+      return;
+    }
+    const zoneList = data.flatMap((z) => z.members.map((m) => m.roomName));
+    console.log(zoneList);
+    zoneList.includes(zone) && setZone(zone);
+  };
 
   useEffect(() => {
-    getInfo(zone)
-  }, [zone])
+    getInfo(zone);
+  }, [zone]);
 
   return (
-    <Box sx={{ width: '100%', overflow: 'hidden' }}>
+    <Box sx={{width: '100%', overflow: 'hidden'}}>
       <Widget>
         <TrackInfo songInfo={songInfo} isLoading={isLoading} />
-        <TrackControls isLoading={isLoading} songInfo={songInfo} handleInput={handleInput} currentZone={zone} />
+        <TrackControls
+          isLoading={isLoading}
+          songInfo={songInfo}
+          handleInput={handleInput}
+          currentZone={zone}
+        />
         {/* <TrackPosition /> */}
         <VolumeControls currentZone={zone} />
         <ZoneSelector initZone={zone} handleSetZone={handleSetZone} />
