@@ -7,7 +7,7 @@ import { ZonesListResponseSchema, ZoneStateResponseSchema } from './schema';
 // This should be read from a .env.local file in the root
 // with a line like SONOS_SERVER=http://123.123.123.242:5005
 // Setting this to 'mock' will use the mock data
-const SERVER_URL = process.env.NEXT_PUBLIC_SONOS_SERVER;
+const SERVER_URL = process.env.SONOS_SERVER;
 if (!SERVER_URL) {
   throw new Error('SONOS_SERVER env variable not set');
 }
