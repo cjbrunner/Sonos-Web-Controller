@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Box, MenuItem, Select } from '@mui/material';
 import { useZoneListQuery } from '../queries';
 
@@ -6,7 +7,7 @@ import { useZoneListQuery } from '../queries';
 
 type ZoneSelectorProps = {
   zone: string;
-  handleSetZone: () => void;
+  handleSetZone: Dispatch<SetStateAction<string>>;
 };
 
 export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
@@ -14,7 +15,6 @@ export const ZoneSelector: React.FC<ZoneSelectorProps> = ({
   handleSetZone,
 }) => {
   const result = useZoneListQuery();
-  console.log(result);
   const { data: zones, isLoading } = result;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>

@@ -1,3 +1,5 @@
+require('source-map-support').install();
+
 import { Box } from '@mui/material';
 import { Player } from './components/Player';
 import { WallPaper } from './components/Wallpaper';

@@ -43,7 +43,7 @@ export const useSetVolumeMutation = (zone: string) => {
     mutationFn: ({ volume }: { volume: number }) =>
       sendSonosCommand({
         zone,
-        operation: 'setVolume',
+        operation: 'volume',
         param: volume.toString(),
       }),
     onSettled: () => {
